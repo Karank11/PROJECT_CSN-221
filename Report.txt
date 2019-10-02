@@ -1,0 +1,11 @@
+                                    A case for two-way skewed-associative caches
+
+Research Problem Statement
+
+	        As the gap between the performance of microprocessor and memory performance widens, the penalty for accessing
+  required data from higher level cache increases rapidly. Therefore, the miss rate is a key factor in deciding 
+  the performance of the cache from its average memory access time. Since the size of the caches are often 
+  constrained so as not to make the processor chip too large.
+          In response to this problem, it is important to find ways of increasing the hit rate without simply 
+  increasing the size of the L2 cache. One way to do this is through a different mapping function, where a certain 
+  address is mapped to different blocks in each set, thereby reducing possible collisions.	
