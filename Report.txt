@@ -13,6 +13,14 @@ Research Problem Statement
 
 Abstract
 	
-         This project focuses on an idea of new organization for multi-bank cache:  The skewed-associative cache. In which , we will consider the case of two-way skewed associative cache.
-   There is an inherent tradeoff between direct mapped caches and associative caches.Direct mapped caches don’t have to choose among the cache lines (single cache line) but at the same time suffers from high miss rate.On the other hand, set-associative caches provide has relatively less miss rate by providing flexibility to place in different cache lines, hence less conflict misses.So skewed-associative cache is  a new design which helps in improving miss rate while not compromising with the frequency at the same time.The hardware complexity of two-way skewed-associative cache  is same as the two-way set-associative cache ,yet simulations show that it typically exhibits the same hit ratio as a four-way set associative cache with the same size. Then skewed-associative caches must be preferred to set-associative caches. 
-      Direct-mapped caches exhibit hit ratios nearly as good as set-associative caches at a lower hardware cost. Moreover, the cache hit time on a direct-mapped cache may be quite smaller than the cache hit time on a set-associative cache.
+         This project focuses on an idea of new organization for multi-bank cache: The skewed-associative cache. In which , 
+   we will consider the case of two-way skewed associative cache.
+   There is an inherent tradeoff between direct mapped caches and associative caches.Direct mapped caches don’t have 
+   to choose among the cache lines (single cache line) but at the same time suffers from high miss rate.On the other hand,
+   set-associative caches provide has relatively less miss rate by providing flexibility to place in different cache
+   lines, hence less conflict misses.So skewed-associative cache is  a new design which helps in improving miss rate while
+   not compromising with the frequency at the same time.The hardware complexity of two-way skewed-associative cache  is same
+   as the two-way set-associative cache ,yet simulations show that it typically exhibits the same hit ratio as a four-way 
+   set associative cache with the same size. Then skewed-associative caches must be preferred to set-associative caches. 
+      Direct-mapped caches exhibit hit ratios nearly as good as set-associative caches at a lower hardware cost. Moreover,
+      the cache hit time on a direct-mapped cache may be quite smaller than the cache hit time on a set-associative cache.
