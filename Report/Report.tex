@@ -3,6 +3,8 @@
 \usepackage[margin=1.5in]{geometry}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
+\usepackage{hyperref}
+
 \title{\Huge A case for two-way skewed-associative caches}
 \author{Rushiprasad Sagare\\
   \texttt{18114071}
@@ -140,11 +142,77 @@ to be replaced must be chosen among X blocks. Different replacement policies may
 \qquad LRU replacement policy is generally considered as the most efficient policy. Implementing an LRU policy on a two-way set-associative cache is quite simple. A single bit tag per cache line is sufficient: when a line is accessed, this tag is asserted and the tag of the second line of the set is deasserted.
 
 \qquad Unfortunately, a simple LRU cannot be implemented on a skewed-associative cache. Therefore, some pseudo-LRU replacement policies are used.
-\newline\\\\
-\textbf{References}\\\\
-1)A. Seznec, "A case for two-way skewed associative caches"\\
-2)A. Seznec, "Skewed-associative caches"\\
-3)F. Bodin, A. Seznec, "Skewed-associativity enhances performance predictability"
 
+\section{Evaluation methodology}
+The purpose of this study is not to measure absolute miss ratios, but, first
+to show that there is a need for high associativity and at second to
+evaluate replacement policies for skewed-associative caches.
+\qquad Then,the performance for cache C will be:\\
+P $=$ miss ratio on C $/$ reference miss ratio\\
+\qquad where \textbf{reference miss ratio} is the miss ratio on a 2-way
+set-associative cache with LRU replacement for the benchmark and the
+considered structure.\\
+
+\section{Replacement policies for skewed associative caches}
+The replacement policies provided here are :
+
+\subsection{Single-bit replacement policy}--$>$ 
+A tag bit is associated with each line in bank 0: when the line is indexed, the tag bit is asserted when the data was in bank 0 and deasserted when the data is in bank 1.
+
+\subsection{Usefulness policy} --$>$ 
+A tag bit U is associated with each line the two banks. When a line is indexed, on a hit the tag bit is updated with the number of the hitting bank.
+On a miss, the tag bits of the two selected lines are read: when they agree on value b, the missing line is written in bank 1-b, when they disagree, the number of the target bank is randomly selected.
+
+
+\subsection{Not Recently Used} --$>$
+A bit tag RU (Recently used) is asserted when the cache line is accessed.
+Periodically the bit tags RU of all the cache lines are reset: we
+experimentally determined that a good period is each "cache size in
+bytes"$/$4 accesses to the cache.\\
+
+\qquad When a block misses in the cache, the replaced block is chosen among the X possible blocks in the following priority order:\\
+
+1) Randomly among the blocks for which the RU tag is clear.\\
+
+2) Randomly among the blocks for which the RU tag is set, but which have not been loaded in the cache.\\
+
+3) Randomly among the blocks for which the RU tag is asserted and which have been modified.
+
+
+\subsection{Not Recently Used + Useful} --$>$ 
+Two tag bits Y (for young) and U (for useful) are used. They are asserted just as defined previously, but the choice of the replacement target is now done as with following priority:\\
+
+1) If one of the block is \textbf{old} and the second one is \textbf{young} then select the \textbf{old} block.\\
+
+2) If the two U bits agree on value b, then select block in bank 1-b.\\
+
+3) Randomly select one of the two banks.
+\newpage
+\subsection{Enhanced Not Recently Used} --$>$ 
+Replacement target is chosen with the following priorities:\\
+
+1) Randomly select among the \textbf{old} blocks.\\
+
+2) Randomly select among the \textbf{young} blocks.\\
+
+3) Randomly select among the \textbf{very young} blocks.
+
+\section{Results}
+1) The two-way skewed-associative cache show approximately same miss ratio as a four-way set associative cache.\\
+
+2) The improvement of performance of skewed-associative over set-associative caches is mostly due to the inter-bank distribution property.\\
+
+3) There is no significant hit ratio improvement when increasing the inter-bank dispersion degree over 8 on a two-way skewed-associative cache as there is no significant hit ratio improvement when increasing the associativity degree over 4 or 8 on a set-associative cache.\\
+
+\section{References}
+
+1)A. Seznec, "A case for two-way skewed associative caches"\\
+\url{http://www.archive.ece.cmu.edu/~ece447/s13/lib/exe/fetch.php?media=p169-seznec.pdf}\\
+
+2)A. Seznec, "Skewed-associative caches"\\
+\url{https://www.researchgate.net/publication/220758754_Skewed-associative_Caches/link/00b4951bf702aa39bf000000/download}\\
+
+3)F. Bodin, A. Seznec, "Skewed-associativity enhances performance \\predictability"\\
+\url{https://hal.inria.fr/inria-00074177/document}
 \end{large}
 \end{document}
